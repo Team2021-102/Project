@@ -1,0 +1,20 @@
+{% extends 'main/gen-base.html' %}
+
+
+{% block text %}
+<h1>Во что поиграть?</h1>
+{% endblock %}
+
+
+{% block gen-content %}
+<h1>Нажмите на кнопку</h1>
+<form action="play method="get">
+    <input type="submit" class="generate-button" name="click" value="ТЫК"/>
+        <p>
+            <h2>Результат</h2>
+                <output name="result">
+                    <h2>{{current_thing}}</h2>
+                </output>
+        </p>
+</form>
+{% endblock %}

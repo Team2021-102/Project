@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GeneraPtor.iml" filepath="$PROJECT_DIR$/.idea/GeneraPtor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/generaptor.iml" filepath="$PROJECT_DIR$/.idea/generaptor.iml" />
     </modules>
   </component>
 </project>
