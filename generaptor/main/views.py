@@ -17,7 +17,7 @@ def main(request):
 
 
 def profile(request):
-    return render(request, 'main/profile.html')
+    return render(request, 'main/exit.html')
 
 
 def tasks(request):
@@ -28,8 +28,8 @@ def donate(request):
     return render(request, 'main/donate.html')
 
 
-def meow(request):
-    return render(request, 'main/meow.html')
+def other(request):
+    return render(request, 'main/other.html')
 
 
 def listen(request):
@@ -84,3 +84,7 @@ def draw(request):
         rand = int(rand)
         current_thing = DrawForm.draws[rand]
     return render(request, 'main/draw.html', {'current_thing': current_thing})
+
+
+def create(request):
+    return render(request, 'main/create.html')

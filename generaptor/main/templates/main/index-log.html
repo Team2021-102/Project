@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Вход</title>
-    <link rel="shortcut icon" href="https://sun9-31.userapi.com/impg/zhJWgspmM2IL2PpONqyobtbpP8cZ1pyZDRQm5g/T0B1g88o3JY.jpg?size=732x682&quality=96&sign=575d04d3b7671771cb29a91f964edb2f&type=album" type="image/x-icon">
+    <link rel="shortcut icon" href="https://sun9-44.userapi.com/impg/ZmTdQH5_ABFK6gEDHHVPly2fEEcRA08PbxLGdg/0qhKRJ1xuGE.jpg?size=735x682&quality=96&sign=25795bd2cf2a66fe7ab2bb83d682f19d&type=album" type="image/x-icon">
 </head>
 <header>
     <div class="login-head">
@@ -19,10 +19,11 @@
         <h1 class="text">Вход</h1>
         <form method="post">
             <div class="forms">
-                <input type="text" placeholder="Логин" class="input-login"><br>
-                <input type="password" minlength="8" placeholder="Пароль" class="input-password"><br>
-                <input type="button" value="Войти" class="send-log" onclick="window.location.href='{% url 'home' %}';"><br>
-                <input type="button" value="Регистрация" class="send-reg" onclick="window.location.href='{% url 'registration' %}';">
+                <input type="text" placeholder="Логин" class="input-login" name="login"><br>
+                <input type="password" minlength="8" placeholder="Пароль" class="input-password" name="password"><br>
+                <input type="submit" value="Войти" class="send-log"><br>
+                <input type="button" value="Регистрация" class="send-reg" onclick="window.location.href='{% url 'registration' %}';"><br>
+                <input type="button" value="Войти без регистрации" class="send-reg" onclick="window.location.href='{% url 'home' %}';">
             </div>
         </form>
     </div>
@@ -117,7 +118,7 @@
     }
 
     .send-reg {
-        margin-top: 40px;
+        margin-top: 20px;
         text-align: center;
         border-color: transparent;
         border-radius: 15px;
