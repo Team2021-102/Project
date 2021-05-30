@@ -1,0 +1,112 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Создание генератора
+{% endblock %}
+
+
+{% block content %}
+<h1>Создание генератора</h1>
+<bin class="page-content">
+    <ul>
+        <form method="post">
+            <input type="text" placeholder="Название" class="input-name" name="name">
+            <h2>Варианты</h2>
+            <input type="text" placeholder="" class="input-element" name="element">
+            <input type="text" placeholder="" class="input-element" name="element">
+            <input type="text" placeholder="" class="input-element" name="element">
+            <input type="text" placeholder="" class="input-element" name="element"><br>
+            <bin class="buttons-bin">
+                <input type="submit" value="Создать" class="button">
+                <input type="submit" value="Добавить" class="button">
+            </bin>
+        </form>
+    </ul>
+</bin>
+{% endblock %}
+
+
+{% block styles %}
+h1 {
+    font-weight: 400;
+    font-family: "Bad Script";
+    font-size: 75px;
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    font-weight: 100;
+    font-family: "Bad Script";
+    font-size: 25px;
+    color: white;
+    margin-left: 41%;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    display: inline-block;
+    width: 49.5%;
+    margin-right: 0;
+    text-align: center;
+}
+
+.button {
+    margin-top: 30px;
+    margin-right: 9%;
+    text-align: center;
+    border-color: transparent;
+    border-radius: 15px;
+    width: 75px;
+    height: 25px;
+    outline: none;
+    background-color: #17610e;
+    color: white;
+    cursor: pointer;
+    }
+
+.button:active {
+    color: black;
+}
+
+.buttons-bin {
+    margin-left: 32%;
+}
+
+.input-name {
+    margin-left: 15%;
+    border-color: #e5e5e5;
+    border-radius: 15px;
+    width: 65%;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    }
+
+.input-element {
+    margin-left: 15%;
+    border-color: #e5e5e5;
+    border-radius: 15px;
+    width: 65%;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 5%;
+    }
+
+.page-content {
+    margin-left: 25%;
+    width: 50%;
+    height: 50%;
+    background: gray;
+    opacity: 0.7;
+    display: inline-block;
+}
+{% endblock %}
