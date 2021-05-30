@@ -13,9 +13,10 @@
     <div>
         <a href="{% url 'home' %}"><img class="logo" src="https://sun9-13.userapi.com/impg/6dcHCOGDsaPYEFh1AtR_c9JBKHcuAFiJIYCAKQ/r9RPbE-AtTs.jpg?size=1197x543&quality=96&sign=eb9529fbcea5bc01d24ae87ae6569ac6&type=album"></a>
         <div class="navigation">
-            <a class="tasks" href="{% url 'donate' %}"><h4 class="link">VIP</h4></a>
-            <a class="tasks" href="{% url 'tasks' %}"><h4 class="link">Мои планы</h4></a>
-            <a href="{% url 'profile' %}"><img class="profile" src="https://yt3.ggpht.com/ytc/AAUvwnjYZVbAPq399-9jIvxfpHtoOMjjUj27XCg5TvKl=s900-c-k-c0x00ffffff-no-rj"></a>
+            <a class="tasks" href="{% url 'create' %}"><h4 class="link">Создание генератора</h4></a>
+            <a class="tasks" href="{% url 'other' %}"><h4 class="link">Другие генераторы</h4></a>
+            <a class="tasks" href="{% url 'tasks' %}"><h4 class="link">Мои генераторы</h4></a>
+            <a class="tasks" href="{% url 'exit' %}"><h4 class="link">Выйти</h4></a>
         </div>
     </div>
 </header>
@@ -43,6 +44,7 @@
         margin: 0;
         padding: 0;
         border: 0;
+        background-size: 100%;
     }
 
     .navigation {
@@ -64,19 +66,13 @@
         margin-top: 5px;
         width: auto;
         height: 50px;
-
     }
 
     .tasks {
-        margin-right: 40px;
+        margin-right: 20px;
+        margin-left: 20px;
         color: black;
         text-decoration: none;
-    }
-
-    .profile {
-        width: 25px;
-        height: 25px;
-        margin-right: 20px;
     }
 
     {% block styles %}{% endblock %}
