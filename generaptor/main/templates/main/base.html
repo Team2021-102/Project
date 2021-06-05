@@ -16,7 +16,12 @@
             <a class="tasks" href="{% url 'create' %}"><h4 class="link">Создание генератора</h4></a>
             <a class="tasks" href="{% url 'other' %}"><h4 class="link">Другие генераторы</h4></a>
             <a class="tasks" href="{% url 'tasks' %}"><h4 class="link">Мои генераторы</h4></a>
-            <a class="tasks" href="{% url 'exit' %}"><h4 class="link">Выйти</h4></a>
+            {% if request.user.is_authenticated %}
+            <h4 class="link">{{user.username}}</h4>
+            <a class="tasks" href="{% url 'logout' %}"><h4 class="link">Выйти</h4></a>
+            {% else %}
+            <a class="tasks" href="{% url 'login' %}"><h4 class="link">Войти</h4></a>
+            {% endif %}
         </div>
     </div>
 </header>

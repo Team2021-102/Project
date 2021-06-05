@@ -18,12 +18,9 @@
     <div class="reg-body">
         <h1 class="text">Регистрация</h1>
         <form method="post">
-            <div class="forms">
-                <input type="email" placeholder="Почта" class="input-email" name="mail"><br>
-                <input type="text" placeholder="Логин" class="input-login" name="login"><br>
-                <input type="password" minlength="8" placeholder="Пароль" class="input-password" name="password"><br>
-                <input type="submit" value="Регистрация" class="send-reg">
-            </div>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Регистрация" class="send-reg">
         </form>
     </div>
 </body>

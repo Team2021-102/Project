@@ -8,6 +8,7 @@
 
 {% block content %}
 <h1>Создание генератора</h1>
+{% if request.user.is_authenticated %}
 <bin class="page-content">
     <ul>
         <form method="post">
@@ -24,6 +25,10 @@
         </form>
     </ul>
 </bin>
+{% else %}
+<h2>Для создания генератора, необходимо авторизоваться</h2>
+<a class="tasks" href="{% url 'login' %}"><h1 class="link">Войти</h1></a>
+{% endif %}
 {% endblock %}
 
 

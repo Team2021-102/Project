@@ -1,14 +1,21 @@
 import random
 
-from django.shortcuts import render
+from django.contrib.auth import logout
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.views.generic.edit import FormView, CreateView
 from .forms import DrawForm, PlayForm, DoingForm, WatchForm, ListenForm, EatForm
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 
 
-def login(request):
+def login1(request):
     return render(request, 'main/index-log.html')
 
 
-def registration(request):
+def registration1(request):
     return render(request, 'main/index-reg.html')
 
 
@@ -88,3 +95,23 @@ def draw(request):
 
 def create(request):
     return render(request, 'main/create.html')
+
+
+class RegisterUser(CreateView):
+    form_class = UserCreationForm
+    template_name = 'main/index-reg.html'
+    success_url = reverse_lazy('login')
+
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'main/index-log.html'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
+
