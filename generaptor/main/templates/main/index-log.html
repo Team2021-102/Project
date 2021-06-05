@@ -19,11 +19,12 @@
         <h1 class="text">Вход</h1>
         <form method="post">
             <div class="forms">
-                <input type="text" placeholder="Логин" class="input-login" name="login"><br>
-                <input type="password" minlength="8" placeholder="Пароль" class="input-password" name="password"><br>
-                <input type="submit" value="Войти" class="send-log"><br>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Войти" class="send-log"><br>
+                </form>>
                 <input type="button" value="Регистрация" class="send-reg" onclick="window.location.href='{% url 'registration' %}';"><br>
-                <input type="button" value="Войти без регистрации" class="send-reg" onclick="window.location.href='{% url 'home' %}';">
             </div>
         </form>
     </div>
