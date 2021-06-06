@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from .models import Generator
+from django.forms import ModelForm, TextInput, Textarea
 
 
 class DrawForm(forms.Form):
@@ -52,4 +54,20 @@ class RegisterUserForm(UserCreationForm):
             'password1': forms.PasswordInput(attrs={'class': 'form-input'}),
             'password2': forms.PasswordInput(attrs={'class': 'form-input'}),
 
+        }
+
+
+class GeneratorForm(ModelForm):
+    class Meta:
+        model = Generator
+        fields = ["title", "task"]
+        widgets = {
+            "title": TextInput(attrs={
+                'class': 'input-name',
+                'placeholder': 'Введите название'
+            }),
+            "task": Textarea(attrs={
+                'class': 'input-element',
+                'placeholder': 'Введите значения через запятую'
+            }),
         }

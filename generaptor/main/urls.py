@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from django.urls import path
 from . import views
 from .views import RegisterUser, LoginUser
@@ -18,4 +19,5 @@ urlpatterns = [
     path('eat', views.eat, name='eat'),
     path('draw', views.draw, name='draw'),
     path('create', views.create, name='create'),
+    path('other/<int:pk>', views.NewsDetailView.as_view(), name='news-detail'),
 ]

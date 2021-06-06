@@ -1,6 +1,5 @@
 {% extends 'main/base.html' %}
 
-
 {% block title %}
 Другие генераторы
 {% endblock %}
@@ -13,7 +12,7 @@
             {% for el in generators %}
             <li>
                 <h2 class="gen-name">{{ el.title }}</h2>
-                <input type="button" value="В генератор" onclick="window.location.href='{% url 'eat' %}';"></input>
+                <input type="button" value="В генератор" onclick="window.location.href='{% url 'news-detail' el.id %}';">
             </li>
             {% endfor %}
         {% else %}

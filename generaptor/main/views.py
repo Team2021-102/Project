@@ -1,14 +1,22 @@
 import random
 
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.generic.edit import FormView, CreateView
-from .forms import DrawForm, PlayForm, DoingForm, WatchForm, ListenForm, EatForm
+from .forms import DrawForm, PlayForm, DoingForm, WatchForm, ListenForm, EatForm, GeneratorForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .models import Generator
+from django.views.generic import DetailView
+
+
+class NewsDetailView(DetailView):
+    model = Generator
+    template_name = 'main/details_view.html'
+    context_object_name = 'generator'
 
 
 def login1(request):
@@ -94,8 +102,29 @@ def draw(request):
     return render(request, 'main/draw.html', {'current_thing': current_thing})
 
 
+class GeneratorCreateView(CreateView):
+    model = Generator
+    template_name = 'main/create.html'
+    form_class = GeneratorForm
+
+
 def create(request):
-    return render(request, 'main/create.html')
+    message = ''
+    if request.method == 'POST':
+        form = GeneratorForm(request.POST)
+        if form.is_valid():
+            form.object = form.save(commit=False)
+            form.object.author = request.user
+            form.object.save()
+            message = 'Новый генератор успешно создан!'
+        else:
+            message = 'Форма некорректна'
+    form = GeneratorForm()
+    contex = {
+        'form' : form,
+        'message' : message,
+    }
+    return render(request, 'main/create.html', contex)
 
 
 class RegisterUser(CreateView):
