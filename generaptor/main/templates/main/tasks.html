@@ -9,8 +9,24 @@
 <h1>Мои генераторы</h1>
 <bin class="page-content">
     <ul>
-        <h1>Чтобы просмотреть свои генераторы, необходимо авторизоваться</h1>
-        <a class="tasks" href="{% url 'login' %}"><h1 class="link">Войти</h1></a>
+        {% if request.user.is_authenticated %}
+            {% if message %}
+                <h1>У вас ещё нет созданных генераторов! </h1>
+                <a class="tasks" href="{% url 'create' %}"><h1 class="link">Создать генератор</h1></a>
+            {% endif %}
+            {% for el in generators %}
+                {% if request.user == el.author %}
+                    <li>
+                        <h2 class="gen-name">{{ el.title }}</h2>
+                        <input type="button" value="В генератор" onclick="window.location.href='{% url 'news-detail' el.id %}';"><br>
+                        <input type="button" value="Удалить" onclick="window.location.href='{% url 'news-delete' el.id %}';">
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <h1>Чтобы просмотреть свои генераторы, необходимо авторизоваться</h1>
+            <a class="tasks" href="{% url 'login' %}"><h1 class="link">Войти</h1></a>
+        {% endif %}
     </ul>
 </bin>
 {% endblock %}
@@ -34,6 +50,24 @@ li {
     width: 49.5%;
     margin-right: 0;
     text-align: center;
+}
+
+input {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+        border-color: transparent;
+        border-radius: 15px;
+        width: 35%;
+        height: 10%;
+        outline: none;
+        background-color: #326960;
+        color: white;
+        cursor: pointer;
+    }
+
+input:active {
+    background-color: black;
 }
 
 .page-content {

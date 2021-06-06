@@ -20,4 +20,5 @@ urlpatterns = [
     path('draw', views.draw, name='draw'),
     path('create', views.create, name='create'),
     path('other/<int:pk>', views.NewsDetailView.as_view(), name='news-detail'),
+    path('other/<int:pk>/delete', views.NewsDeleteView.as_view(), name='news-delete'),
 ]

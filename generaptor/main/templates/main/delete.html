@@ -1,0 +1,114 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+Удаление генератора
+{% endblock %}
+
+
+{% block content %}
+<h1>Удаление генератора</h1>
+{% if request.user.is_authenticated %}
+<bin class="page-content">
+        <form method="post">
+            {% csrf_token %}
+            {% if request.user == generator.author %}
+                <input type="submit" align="red" value="Удалить" class="button"><br>
+            {% else %}
+                <h2>Для удаления генератора нужно являться его автором!</h2>
+            {% endif %}
+            <h2>{{ message }}</h2>
+        </form>
+</bin>
+{% else %}
+<h2>Для создания генератора, необходимо авторизоваться</h2>
+<a class="tasks" href="{% url 'login' %}"><h1 class="link">Войти</h1></a>
+{% endif %}
+{% endblock %}
+
+
+{% block styles %}
+h1 {
+    font-weight: 400;
+    font-family: "Bad Script";
+    font-size: 75px;
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    font-weight: 100;
+    font-family: "Bad Script";
+    font-size: 25px;
+    color: white;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    display: inline-block;
+    width: 49.5%;
+    margin-right: 0;
+    text-align: center;
+}
+
+.button {
+    margin-top: 30px;
+    margin-left: 42.5%;
+    text-align: center;
+    border-color: transparent;
+    border-radius: 15px;
+    width: 75px;
+    height: 25px;
+    outline: none;
+    background-color: #17610e;
+    color: white;
+    cursor: pointer;
+    }
+
+.button:active {
+    color: black;
+}
+
+.buttons-bin {
+    margin-left: 32%;
+}
+
+.input-name {
+    margin-left: 15%;
+    border-color: #e5e5e5;
+    border-radius: 15px;
+    width: 65%;
+    height: 25px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    }
+
+.input-element {
+    margin-left: 15%;
+    border-color: #e5e5e5;
+    border-radius: 15px;
+    width: 65%;
+    height: 100px;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    resize: none;
+    }
+
+.page-content {
+    margin-left: 25%;
+    width: 50%;
+    height: 50%;
+    background: none;
+    opacity: 0.7;
+    display: inline-block;
+}
+{% endblock %}

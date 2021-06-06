@@ -10,21 +10,32 @@ from .forms import DrawForm, PlayForm, DoingForm, WatchForm, ListenForm, EatForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .models import Generator
-from django.views.generic import DetailView
+from django.views.generic import DetailView, DeleteView
 
 
 class NewsDetailView(DetailView):
     model = Generator
     template_name = 'main/details_view.html'
     context_object_name = 'generator'
+    success_url = reverse_lazy('news-result')
+
+    def GetResult(self, form):
+        current_thing = ''
+        if self.request.GET.get('click'):
+            rand = random.uniform(0, len(self.model.tasks_list))
+            rand = int(rand)
+            current_thing = self.model.tasks_list[rand]
+        return render(self.request, 'main/result.html', {'current_thing': current_thing})
+
+
+class NewsDeleteView(DeleteView):
+    model = Generator
+    template_name = 'main/delete.html'
+    success_url = reverse_lazy('other')
 
 
 def login1(request):
     return render(request, 'main/index-log.html')
-
-
-def registration1(request):
-    return render(request, 'main/index-reg.html')
 
 
 def main(request):
@@ -36,7 +47,14 @@ def profile(request):
 
 
 def tasks(request):
-    return render(request, 'main/tasks.html')
+    generators = Generator.objects.order_by('-id')
+    index = 0
+    message = True
+    for el in generators:
+        if el.author == request.user:
+            message = False
+        index = index + 1
+    return render(request, 'main/tasks.html', {'generators': generators, 'message': message})
 
 
 def donate(request):
