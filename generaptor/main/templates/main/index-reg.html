@@ -20,7 +20,7 @@
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Регистрация" class="send-reg">
+            <input type="submit" value="Регистрация" class="send-reg" name="reg" align="center">
         </form>
     </div>
 </body>
@@ -86,7 +86,7 @@
         text-align: center;
     }
 
-    .input-email {
+    .input-reg {
         border-color: #e5e5e5;
         border-radius: 15px;
         height: 25px;

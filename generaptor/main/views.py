@@ -1,22 +1,41 @@
 import random
 
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.generic.edit import FormView, CreateView
-from .forms import DrawForm, PlayForm, DoingForm, WatchForm, ListenForm, EatForm
+from .forms import DrawForm, PlayForm, DoingForm, WatchForm, ListenForm, EatForm, GeneratorForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.views import generic
+from .models import Generator
+from django.views.generic import DetailView, DeleteView
+
+
+class NewsDetailView(DetailView):
+    model = Generator
+    template_name = 'main/details_view.html'
+    context_object_name = 'generator'
+    success_url = reverse_lazy('news-result')
+
+    def GetResult(self, form):
+        current_thing = ''
+        if self.request.GET.get('click'):
+            rand = random.uniform(0, len(self.model.tasks_list))
+            rand = int(rand)
+            current_thing = self.model.tasks_list[rand]
+        return render(self.request, 'main/result.html', {'current_thing': current_thing})
+
+
+class NewsDeleteView(DeleteView):
+    model = Generator
+    template_name = 'main/delete.html'
+    success_url = reverse_lazy('other')
 
 
 def login1(request):
     return render(request, 'main/index-log.html')
-
-
-def registration1(request):
-    return render(request, 'main/index-reg.html')
 
 
 def main(request):
@@ -28,7 +47,14 @@ def profile(request):
 
 
 def tasks(request):
-    return render(request, 'main/tasks.html')
+    generators = Generator.objects.order_by('-id')
+    index = 0
+    message = True
+    for el in generators:
+        if el.author == request.user:
+            message = False
+        index = index + 1
+    return render(request, 'main/tasks.html', {'generators': generators, 'message': message})
 
 
 def donate(request):
@@ -36,7 +62,8 @@ def donate(request):
 
 
 def other(request):
-    return render(request, 'main/other.html')
+    generators = Generator.objects.order_by('-id')
+    return render(request, 'main/other.html', {'generators': generators})
 
 
 def listen(request):
@@ -93,8 +120,29 @@ def draw(request):
     return render(request, 'main/draw.html', {'current_thing': current_thing})
 
 
+class GeneratorCreateView(CreateView):
+    model = Generator
+    template_name = 'main/create.html'
+    form_class = GeneratorForm
+
+
 def create(request):
-    return render(request, 'main/create.html')
+    message = ''
+    if request.method == 'POST':
+        form = GeneratorForm(request.POST)
+        if form.is_valid():
+            form.object = form.save(commit=False)
+            form.object.author = request.user
+            form.object.save()
+            message = 'Новый генератор успешно создан!'
+        else:
+            message = 'Форма некорректна'
+    form = GeneratorForm()
+    contex = {
+        'form' : form,
+        'message' : message,
+    }
+    return render(request, 'main/create.html', contex)
 
 
 class RegisterUser(CreateView):

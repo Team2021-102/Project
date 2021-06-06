@@ -1,5 +1,8 @@
 {% extends 'main/gen-base.html' %}
 
+{% block title %}
+Что поесть?
+{% endblock %}
 
 {% block text %}
 <h1>Что поесть?</h1>
@@ -12,7 +15,7 @@
     <input type="submit" class="generate-button" name="click" value="ТЫК"/>
         <p>
             <output name="result">
-                <h2>{{current_thing}}</h2>
+                <h1>{{current_thing}}</h1>
             </output>
         </p>
 </form>
