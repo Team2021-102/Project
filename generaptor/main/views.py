@@ -8,7 +8,7 @@ from django.views.generic.edit import FormView, CreateView
 from .forms import DrawForm, PlayForm, DoingForm, WatchForm, ListenForm, EatForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.views import generic
+from .models import Generator
 
 
 def login1(request):
@@ -36,7 +36,8 @@ def donate(request):
 
 
 def other(request):
-    return render(request, 'main/other.html')
+    generators = Generator.objects.order_by('-id')
+    return render(request, 'main/other.html', {'generators': generators})
 
 
 def listen(request):

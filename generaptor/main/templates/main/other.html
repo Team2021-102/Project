@@ -9,7 +9,17 @@
 <h1>Другие генераторы</h1>
 <bin class="page-content">
     <ul>
-        <h1>Ну вот сюда надо совать генераторы, надеюсь разберешься</h1>
+        {% if generators %}
+            {% for el in generators %}
+            <li>
+                <h2 class="gen-name">{{ el.title }}</h2>
+                <input type="button" value="В генератор" onclick="window.location.href='{% url 'eat' %}';"></input>
+            </li>
+            {% endfor %}
+        {% else %}
+        <h1>Нет других генераторов, вы можете создать их первыми!</h1>
+        <a class="tasks" href="{% url 'create' %}"><h1 class="link">Создать генераторы</h1></a>
+        {% endif %}
     </ul>
 </bin>
 {% endblock %}
@@ -33,6 +43,24 @@ li {
     width: 49.5%;
     margin-right: 0;
     text-align: center;
+}
+
+input {
+        margin-top: 20px;
+        margin-bottom: 40px;
+        text-align: center;
+        border-color: transparent;
+        border-radius: 15px;
+        width: 35%;
+        height: 10%;
+        outline: none;
+        background-color: #326960;
+        color: white;
+        cursor: pointer;
+    }
+
+input:active {
+    background-color: black;
 }
 
 .page-content {
